@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация | Университетский Форум</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet"
+    />
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-primary: #64b5f6;
+            --color-secondary: #0d47a1;
+            --color-text: #0d47a1;
+            --color-light: rgba(100, 181, 246, 0.1);
+            --font-family: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: var(--color-bg);
+            font-family: var(--font-family);
+            color: var(--color-text);
+            overflow: hidden;
+        }
+
+        /* Центрируем контейнер на всю экранную высоту */
+        .register-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: var(--color-light);
+        }
+
+        /* Карточка формы регистрации */
+        .register-card {
+            width: 320px;
+            padding: 40px 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .register-card h1 {
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+            color: var(--color-secondary);
+        }
+
+        .register-card p {
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            color: var(--color-text);
+        }
+
+        /* Поля ввода */
+        .register-input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .register-input label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 6px;
+            text-align: left;
+            color: var(--color-text);
+        }
+
+        .register-input input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 1rem;
+            border: 1px solid #cfd8dc;
+            border-radius: 6px;
+            background-color: #f9fafd;
+            transition: border-color 0.2s;
+        }
+
+        .register-input input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background-color: #ffffff;
+        }
+
+        /* Кнопка регистрации */
+        .btn-register {
+            width: 100%;
+            padding: 12px 0;
+            margin-top: 10px;
+            background-color: var(--color-secondary);
+            color: var(--color-primary); /* Текст светло-голубой */
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .btn-register:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        /* Ссылка на вход */
+        .login-link {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.875rem;
+            color: var(--color-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .login-link:hover {
+            color: var(--color-primary);
+        }
+
+        /* Для мобильных экранов: немного сузим отступы */
+        @media (max-width: 400px) {
+            .register-card {
+                width: 100%;
+                margin: 0 16px;
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-wrapper">
+        <div class="register-card">
+            <h1>Регистрация</h1>
+            <p>Создайте новый аккаунт, чтобы присоединиться к форуму</p>
+
+            <form action="/register" method="POST">
+                <div class="register-input">
+                    <label for="new-username">Логин</label>
+                    <input
+                        type="text"
+                        id="new-username"
+                        name="username"
+                        placeholder="Введите логин"
+                        required
+                    />
+                </div>
+
+                <div class="register-input">
+                    <label for="new-email">E-mail</label>
+                    <input
+                        type="email"
+                        id="new-email"
+                        name="email"
+                        placeholder="Введите E-mail"
+                        required
+                    />
+                </div>
+
+                <div class="register-input">
+                    <label for="new-password">Пароль</label>
+                    <input
+                        type="password"
+                        id="new-password"
+                        name="password"
+                        placeholder="Придумайте пароль"
+                        required
+                    />
+                </div>
+
+                <div class="register-input">
+                    <label for="confirm-password">Подтвердите пароль</label>
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm_password"
+                        placeholder="Повторите пароль"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="btn-register">Зарегистрироваться</button>
+            </form>
+
+            <a href="/login" class="login-link">Уже есть аккаунт? Войти</a>
+        </div>
+    </div>
+</body>
+</html>
