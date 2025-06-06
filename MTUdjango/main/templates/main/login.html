@@ -145,11 +145,10 @@
             <h1>Вход на Форум</h1>
             <p>Пожалуйста, авторизуйтесь, чтобы продолжить</p>
 
-            <form method="POST">
+            <form method="post">
                 {% csrf_token %}
-
+                <input type="hidden" name="next" value="{{next}}" />
                 {{ form.as_p }}
-
                 <button type="submit" class="btn-login">Войти</button>
             </form>
 

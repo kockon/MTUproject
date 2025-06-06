@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Профиль | Университетский Форум</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --font-family: 'Montserrat', sans-serif;
+      --color-bg: #f5f7fa;
+      --color-card: #ffffff;
+      --color-primary: #0d47a1;
+      --color-secondary: #64b5f6;
+      --color-text: #0d47a1;
+      --color-light-text: #555555;
+      --color-border: #d0d7de;
+      --color-hover: #e3f2fd;
+      --color-avatar-bg: #e0e0e0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      background-color: var(--color-bg);
+      font-family: var(--font-family);
+      color: var(--color-text);
+    }
+    header {
+      background-color: var(--color-card);
+      padding: 16px 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--color-primary);
+    }
+    header a {
+      text-decoration: none;
+      color: var(--color-secondary);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    header a:hover {
+      color: var(--color-primary);
+    }
+    .container {
+      max-width: 800px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+    .profile-card {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 32px;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      flex: 0 0 120px;
+      width: 120px;
+      height: 120px;
+      background-color: var(--color-avatar-bg);
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-info {
+      flex: 1;
+      min-width: 200px;
+    }
+    .profile-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--color-primary);
+    }
+    .profile-info p {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--color-light-text);
+    }
+    .section {
+      margin-bottom: 32px;
+    }
+    .section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+    .item-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .item-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 16px;
+      transition: background-color 0.2s;
+    }
+    .item-card:hover {
+      background-color: var(--color-hover);
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .item-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      text-decoration: none;
+    }
+    .item-meta {
+      font-size: 0.85rem;
+      color: var(--color-light-text);
+    }
+    .item-body {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 600px) {
+      .profile-card {
+        flex-direction: column;
+        align-items: center;
+      }
+      .profile-info {
+        text-align: center;
+      }
+      .item-body {
+        -webkit-line-clamp: 4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <h1>Университетский Форум</h1>
+      <a href="forum.html">← К списку вопросов</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Профильные данные -->
+    <div class="profile-card">
+      <div class="avatar" id="avatarContainer">
+        <!-- Если avatarUrl задан, вставляется <img> -->
+      </div>
+      <div class="profile-info">
+        <h2 id="usernameDisplay">Имя пользователя</h2>
+        <p>Email: <span id="emailDisplay">user@example.com</span></p>
+        <p>Дата регистрации: <span id="joinDateDisplay">01.01.2025</span></p>
+        <p>Всего вопросов: <span id="questionsCount">0</span></p>
+        <p>Всего ответов: <span id="answersCount">0</span></p>
+      </div>
+    </div>
+
+    <!-- Мои вопросы -->
+    <div class="section" id="myQuestionsSection">
+      <h3>Мои вопросы</h3>
+      <ul class="item-list" id="myQuestionsList">
+        <!-- Список вопросов рендерится скриптом -->
+      </ul>
+    </div>
+
+    <!-- Мои ответы -->
+    <div class="section" id="myAnswersSection">
+      <h3>Мои ответы</h3>
+      <ul class="item-list" id="myAnswersList">
+        <!-- Список ответов рендерится скриптом -->
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    // Примерные данные профиля (в реальной системе эти значения выдаёт сервер)
+    const username = 'Student123';
+    const email = 'student123@university.edu';
+    const joinDate = '2025-02-15T10:30:00Z'; // ISO-строка
+    const avatarUrl = ''; // например: 'https://example.com/avatar.jpg'; оставьте пустым для генерации инициалов
+
+    // Массив моих вопросов
+    const myQuestions = [
+      {
+        zagolovok: 'Как изменить пароль в личном кабинете?',
+        teloVopr: 'Не могу найти, где поменять пароль. Раньше была соответствующая опция, а теперь её нет.',
+        date: '2025-03-01T14:20:00Z',
+        kolvoOtv: 2
+      },
+      {
+        zagolovok: 'Где скачать методички по дискретной математике?',
+        teloVopr: 'Преподаватель обещал выложить PDF, но не вижу ссылок на сайте. Может, кто-нибудь поделится?',
+        date: '2025-04-10T09:05:00Z',
+        kolvoOtv: 0
+      },
+      // … Добавьте другие вопросы пользователя …
+    ];
+
+    // Массив моих ответов
+    const myAnswers = [
+      {
+        questionTitle: 'Как подключиться к университетскому Wi-Fi?',
+        answerText: 'Чтобы подключиться, выберите сеть UniWiFi, введите логин/пароль от портала, EAP — PEAP, Phase 2 — MSCHAPV2.',
+        date: '2025-03-05T12:40:00Z'
+      },
+      {
+        questionTitle: 'Можно ли продлить сессию удалённо?',
+        answerText: 'Да, напишите декану вашего факультета электронное письмо с обоснованием, и он продлит доступ.',
+        date: '2025-04-12T16:10:00Z'
+      },
+      // … Добавьте другие ответы пользователя …
+    ];
+
+    // Функция форматирования даты «ДД.MM.ГГГГ»
+    function formatDateShort(isoString) {
+      const d = new Date(isoString);
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}.${month}.${year}`;
+    }
+
+    // Заполним данные профиля
+    document.getElementById('usernameDisplay').innerText = username;
+    document.getElementById('emailDisplay').innerText = email;
+    document.getElementById('joinDateDisplay').innerText = formatDateShort(joinDate);
+    document.getElementById('questionsCount').innerText = myQuestions.length;
+    document.getElementById('answersCount').innerText = myAnswers.length;
+
+    // Рендер аватара: если avatarUrl есть, вставляем <img>; иначе — инициалы
+    const avatarContainer = document.getElementById('avatarContainer');
+    if (avatarUrl) {
+      const img = document.createElement('img');
+      img.src = avatarUrl;
+      img.alt = 'Аватар пользователя';
+      avatarContainer.appendChild(img);
+    } else {
+      // Генерируем инициалы из username
+      const initials = username
+        .split(/[\s._-]+/)
+        .map(part => part.charAt(0).toUpperCase())
+        .slice(0, 2)
+        .join('');
+      const placeholder = document.createElement('div');
+      placeholder.style.width = '100%';
+      placeholder.style.height = '100%';
+      placeholder.style.display = 'flex';
+      placeholder.style.alignItems = 'center';
+      placeholder.style.justifyContent = 'center';
+      placeholder.style.fontSize = '2.5rem';
+      placeholder.style.color = '#ffffff';
+      placeholder.style.backgroundColor = 'var(--color-secondary)';
+      placeholder.innerText = initials;
+      avatarContainer.appendChild(placeholder);
+    }
+
+    // Рендер списка моих вопросов
+    const myQuestionsList = document.getElementById('myQuestionsList');
+    if (myQuestions.length === 0) {
+      const p = document.createElement('p');
+      p.style.color = 'var(--color-light-text)';
+      p.style.fontStyle = 'italic';
+      p.innerText = 'Вы ещё не задавали ни одного вопроса.';
+      myQuestionsList.appendChild(p);
+    } else {
+      myQuestions.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'item-card';
+        li.innerHTML = `
+          <div class="item-header">
+            <a href="#" class="item-title">${item.zagolovok}</a>
+            <div class="item-meta">${formatDateShort(item.date)}</div>
+          </div>
+          <div class="item-body">${item.teloVopr.replace(/\n/g, '<br>')}</div>
+          <div class="item-footer" style="margin-top: 8px; text-align: right; font-size: 0.85rem; color: var(--color-light-text);">
+            Ответов: ${item.kolvoOtv}
+          </div>
+        `;
+        myQuestionsList.appendChild(li);
+      });
+    }
+
+    // Рендер списка моих ответов
+    const myAnswersList = document.getElementById('myAnswersList');
+    if (myAnswers.length === 0) {
+      const p = document.createElement('p');
+      p.style.color = 'var(--color-light-text)';
+      p.style.fontStyle = 'italic';
+      p.innerText = 'Вы ещё не оставляли ни одного ответа.';
+      myAnswersList.appendChild(p);
+    } else {
+      myAnswers.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'item-card';
+        li.innerHTML = `
+          <div class="item-header">
+            <a href="#" class="item-title">${item.questionTitle}</a>
+            <div class="item-meta">${formatDateShort(item.date)}</div>
+          </div>
+          <div class="item-body">${item.answerText.replace(/\n/g, '<br>')}</div>
+        `;
+        myAnswersList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

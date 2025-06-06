@@ -3,13 +3,18 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm, TextInput, Textarea
+from .models import Articles
 
 
-class LoginUserForm(AuthenticationForm):
 
-    class Meta:
-        model = User
-        fields = ['username', 'password']
+class LoginUserForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    # class Meta:
+    #     model = User
+    #     fields = ['username', 'password']
 
 
 class RegisterUserForm(UserCreationForm):
@@ -20,8 +25,18 @@ class RegisterUserForm(UserCreationForm):
         fields = ['username', 'email']
 
 
-    # def clean_email(self):
-    #     email = self.cleaned_data['email']
-    #     if get_user_model().objects.filter(email=email).exists():
-    #         raise forms.ValidationError('Почта привязана к другому аккаунту')
+class ArticlesForm(ModelForm):
+    class Meta:
+        model = Articles
+        fields = ['title', 'full_text']
+
+        widgets = {
+            'title': TextInput(attrs={
+                'placeholder': "Введите заголовок",
+                'maxlength': "150",
+            }),
+            "full_text": Textarea(attrs={
+                'placeholder': "Опишите свой вопрос подробно"
+            }),
+        }
 

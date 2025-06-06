@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Новый вопрос | Университетский Форум</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --font-family: 'Montserrat', sans-serif;
+      --color-bg: #f5f7fa;
+      --color-card: #ffffff;
+      --color-primary: #0d47a1;
+      --color-secondary: #64b5f6;
+      --color-text: #0d47a1;
+      --color-light-text: #555555;
+      --color-border: #d0d7de;
+      --color-hover: #e3f2fd;
+      --color-button-text: #ffffff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      background-color: var(--color-bg);
+      font-family: var(--font-family);
+      color: var(--color-text);
+    }
+    header {
+      background-color: var(--color-card);
+      padding: 16px 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--color-primary);
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: var(--color-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--color-primary);
+    }
+    .form-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .form-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--color-text);
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background-color: #f9fafd;
+      transition: border-color 0.2s;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background-color: #ffffff;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.4;
+    }
+    .btn-submit {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: var(--color-secondary);
+      color: var(--color-button-text);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-submit:hover {
+      background-color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Университетский Форум</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <a href="/questions/" class="back-link">← Вернуться к списку вопросов</a>
+
+    <div class="form-card">
+      <h2>Создать новый вопрос</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Заголовок вопроса</label>
+          {{form.title}}
+        </div>
+        <div class="form-group">
+          <label>Текст вопроса</label>
+          {{form.full_text}}
+        </div>
+        <span>{{error}}</span>
+        <button type="submit" class="btn-submit">Опубликовать вопрос</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

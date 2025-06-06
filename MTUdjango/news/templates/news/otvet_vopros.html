@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вопрос | Университетский Форум</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --font-family: 'Montserrat', sans-serif;
+      --color-bg: #f5f7fa;
+      --color-card: #ffffff;
+      --color-primary: #0d47a1;
+      --color-secondary: #64b5f6;
+      --color-text: #0d47a1;
+      --color-light-text: #555555;
+      --color-border: #d0d7de;
+      --color-hover: #e3f2fd;
+      --color-answer-bg: #fafbfc;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      background-color: var(--color-bg);
+      font-family: var(--font-family);
+      color: var(--color-text);
+    }
+    header {
+      background-color: var(--color-card);
+      padding: 16px 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--color-primary);
+    }
+    .container {
+      max-width: 800px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: var(--color-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--color-primary);
+    }
+    .question-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .question-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+    .question-meta {
+      font-size: 0.85rem;
+      color: var(--color-light-text);
+      margin-bottom: 16px;
+    }
+    .question-body {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--color-text);
+    }
+    .answers-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+    .answer-card {
+      background-color: var(--color-answer-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .answer-text {
+      font-size: 0.975rem;
+      line-height: 1.5;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+    .answer-meta {
+      font-size: 0.8rem;
+      color: var(--color-light-text);
+      text-align: right;
+    }
+    /* Если нет ответов */
+    .no-answers {
+      font-size: 0.975rem;
+      color: var(--color-light-text);
+      font-style: italic;
+    }
+    /* Настройка формы добавления ответа (необязательно) */
+    .add-answer-form {
+      margin-top: 32px;
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .add-answer-form textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      resize: vertical;
+      background-color: #f9fafd;
+      transition: border-color 0.2s;
+    }
+    .add-answer-form textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background-color: #ffffff;
+    }
+    .add-answer-form button {
+      margin-top: 12px;
+      padding: 10px 16px;
+      background-color: var(--color-secondary);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .add-answer-form button:hover {
+      background-color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Университетский Форум</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Ссылка Назад к списку вопросов -->
+    <a href="/questions/" class="back-link">← Вернуться к списку вопросов</a>
+
+    <!-- Карточка вопроса -->
+    <div class="question-card">
+      <p>{{article.user_id.username}}</p>
+      <div class="question-title">{{article.title}}</div>
+      <div class="question-meta">{{article.date}}</div>
+      <div class="question-body">{{article.full_text}}</div>
+    </div>
+
+    <!-- Заголовок раздела ответов -->
+    <div class="answers-header">Ответы (<span id="answersCount">0</span>)</div>
+
+    <!-- Список ответов -->
+    <div id="answersContainer">
+      {% for answer in answers %}
+          {{ answer.asnwer }}
+      {% endfor %}
+      <!-- Если ответов нет, ниже покажется сообщение -->
+    </div>
+
+    <!-- Необязательная форма для добавления ответа -->
+    <div class="add-answer-form">
+      <label style="font-size: 0.9rem; color: var(--color-text);">
+        Ваш ответ:
+      </label>
+      <form method="POST">
+        {% csrf_token %}
+        {{form.answer}}
+        <button type="submit" id="submitAnswerBtn">Добавить ответ</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Пример переменных — в реальном приложении их нужно заполнить с сервера
+    const zagolovok = 'Как подключиться к университетскому Wi-Fi?';
+    const teloVopr = 
+      'Я пытаюсь подключиться к сети университета, но не понимаю, какие настройки нужно задать. ' +
+      'Можете, пожалуйста, описать пошагово, что нужно указать в настройках сети (SSID, тип безопасности, пароль и т.д.)?';
+    const kolvoOtv = 2; // число ответов
+    // Массив ответов: здесь примеры строк. Можно заменить на объекты {text, date, author} при необходимости.
+    let otvet = [
+      {
+        text: 'Для начала зайдите в настройки Wi-Fi, выберите сеть "UniWiFi". Тип безопасности — WPA2-Enterprise. ' +
+              'В поле EAP Method выберите PEAP, Phase 2 — MSCHAPV2, в поле имя пользователя укажите ваш логин, ' +
+              'пароль — тот же, что на студенческий портал. После сохранения подключение должно установиться.',
+        date: '2025-06-02T10:15:00Z'
+      },
+      {
+        text: 'Если у вас не работает встроенный Wi-Fi, попробуйте сбросить профиль сети: ' +
+              'удалите "UniWiFi" и заново добавьте его с настройками, описанными выше. ' +
+              'Иногда помогает перезагрузка ноутбука и принудительное обновление списка сетей.',
+        date: '2025-06-02T12:45:00Z'
+      }
+    ];
+
+    // Функция форматирования даты «ДД.MM.ГГГГ ЧЧ:ММ»
+    function formatDate(isoString) {
+      const d = new Date(isoString);
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${day}.${month}.${year} ${hours}:${minutes}`;
+    }
+
+    // Рендерим вопрос
+    document.getElementById('questionTitle').innerText = zagolovok;
+    document.getElementById('questionMeta').innerText = `Опубликовано: ${formatDate(new Date().toISOString())}`;
+    document.getElementById('questionBody').innerText = teloVopr;
+    document.getElementById('answersCount').innerText = kolvoOtv;
+
+    const answersContainer = document.getElementById('answersContainer');
+
+    function renderAnswers() {
+      answersContainer.innerHTML = '';
+      if (otvet.length === 0) {
+        const p = document.createElement('p');
+        p.className = 'no-answers';
+        p.innerText = 'Пока нет ответов. Вы можете быть первым, кто ответит!';
+        answersContainer.appendChild(p);
+      } else {
+        otvet.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'answer-card';
+
+          div.innerHTML = `
+            <div class="answer-text">${item.text.replace(/\n/g, '<br>')}</div>
+            <div class="answer-meta">Добавлено: ${formatDate(item.date)}</div>
+          `;
+          answersContainer.appendChild(div);
+        });
+      }
+    }
+
+    renderAnswers();
+
+    // Обработка добавления нового ответа (сохранения в otvet и перерендер)
+    const submitBtn = document.getElementById('submitAnswerBtn');
+    const textarea = document.getElementById('newAnswer');
+
+    submitBtn.addEventListener('click', () => {
+      const text = textarea.value.trim();
+      if (!text) {
+        alert('Введите текст ответа.');
+        return;
+      }
+      // Добавляем новый ответ в массив
+      const now = new Date().toISOString();
+      otvet.push({ text, date: now });
+      // Обновляем счетчик
+      document.getElementById('answersCount').innerText = otvet.length;
+      // Очищаем textarea и перерендерим список
+      textarea.value = '';
+      renderAnswers();
+    });
+  </script>
+</body>
+</html>

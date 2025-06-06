@@ -1,196 +1,206 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8" />-->
-<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
-<!--  <title>Форум | Университетский Форум</title>-->
-<!--  <link-->
-<!--    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"-->
-<!--    rel="stylesheet"-->
-<!--  />-->
-<!--  <style>-->
-<!--    :root {-->
-<!--      &#45;&#45;font-family: 'Montserrat', sans-serif;-->
-<!--      &#45;&#45;color-bg: #f5f7fa;-->
-<!--      &#45;&#45;color-card: #ffffff;-->
-<!--      &#45;&#45;color-primary: #0d47a1;-->
-<!--      &#45;&#45;color-secondary: #64b5f6;-->
-<!--      &#45;&#45;color-text: #0d47a1;-->
-<!--      &#45;&#45;color-light-text: #555555;-->
-<!--      &#45;&#45;color-border: #d0d7de;-->
-<!--      &#45;&#45;color-hover: #e3f2fd;-->
-<!--    }-->
-<!--    * {-->
-<!--      box-sizing: border-box;-->
-<!--      margin: 0;-->
-<!--      padding: 0;-->
-<!--    }-->
-<!--    html, body {-->
-<!--      font-family: var(&#45;&#45;font-family);-->
-<!--      background-color: var(&#45;&#45;color-bg);-->
-<!--      color: var(&#45;&#45;color-text);-->
-<!--      min-height: 100vh;-->
-<!--    }-->
-<!--    header {-->
-<!--      background-color: var(&#45;&#45;color-card);-->
-<!--      padding: 16px 24px;-->
-<!--      box-shadow: 0 2px 4px rgba(0,0,0,0.1);-->
-<!--      position: sticky;-->
-<!--      top: 0;-->
-<!--      z-index: 100;-->
-<!--    }-->
-<!--    header h1 {-->
-<!--      font-size: 1.5rem;-->
-<!--      color: var(&#45;&#45;color-primary);-->
-<!--    }-->
-<!--    .container {-->
-<!--      max-width: 980px;-->
-<!--      margin: 0 auto;-->
-<!--      padding: 16px 24px;-->
-<!--    }-->
-<!--    /* Поиск и фильтры */-->
-<!--    .controls {-->
-<!--      display: flex;-->
-<!--      flex-wrap: wrap;-->
-<!--      gap: 12px;-->
-<!--      margin-bottom: 24px;-->
-<!--      align-items: center;-->
-<!--    }-->
-<!--    .controls input[type="text"] {-->
-<!--      flex: 1;-->
-<!--      padding: 8px 12px;-->
-<!--      border: 1px solid var(&#45;&#45;color-border);-->
-<!--      border-radius: 4px;-->
-<!--      font-size: 1rem;-->
-<!--    }-->
-<!--    .controls select {-->
-<!--      padding: 8px 12px;-->
-<!--      border: 1px solid var(&#45;&#45;color-border);-->
-<!--      border-radius: 4px;-->
-<!--      font-size: 1rem;-->
-<!--      background-color: #fff;-->
-<!--      color: var(&#45;&#45;color-text);-->
-<!--    }-->
-<!--    /* Список вопросов */-->
-<!--    .question-list {-->
-<!--      list-style: none;-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      gap: 16px;-->
-<!--    }-->
-<!--    .question-card {-->
-<!--      background-color: var(&#45;&#45;color-card);-->
-<!--      border: 1px solid var(&#45;&#45;color-border);-->
-<!--      border-radius: 6px;-->
-<!--      padding: 16px;-->
-<!--      transition: background-color 0.2s;-->
-<!--    }-->
-<!--    .question-card:hover {-->
-<!--      background-color: var(&#45;&#45;color-hover);-->
-<!--    }-->
-<!--    .question-header {-->
-<!--      display: flex;-->
-<!--      justify-content: space-between;-->
-<!--      align-items: baseline;-->
-<!--    }-->
-<!--    .question-title {-->
-<!--      font-size: 1.1rem;-->
-<!--      font-weight: 600;-->
-<!--      color: var(&#45;&#45;color-primary);-->
-<!--      text-decoration: none;-->
-<!--    }-->
-<!--    .question-meta {-->
-<!--      font-size: 0.875rem;-->
-<!--      color: var(&#45;&#45;color-light-text);-->
-<!--    }-->
-<!--    .question-body {-->
-<!--      margin-top: 8px;-->
-<!--      font-size: 0.975rem;-->
-<!--      color: var(&#45;&#45;color-text);-->
-<!--      line-height: 1.4;-->
-<!--    }-->
-<!--    .question-footer {-->
-<!--      margin-top: 12px;-->
-<!--      display: flex;-->
-<!--      justify-content: flex-end;-->
-<!--      gap: 16px;-->
-<!--      font-size: 0.875rem;-->
-<!--      color: var(&#45;&#45;color-light-text);-->
-<!--    }-->
-<!--    .badge-answered {-->
-<!--      background-color: var(&#45;&#45;color-secondary);-->
-<!--      color: #fff;-->
-<!--      padding: 2px 6px;-->
-<!--      border-radius: 4px;-->
-<!--      font-size: 0.75rem;-->
-<!--    }-->
-<!--    /* Пагинация */-->
-<!--    .pagination {-->
-<!--      margin-top: 32px;-->
-<!--      display: flex;-->
-<!--      justify-content: center;-->
-<!--      gap: 8px;-->
-<!--      flex-wrap: wrap;-->
-<!--    }-->
-<!--    .pagination button {-->
-<!--      padding: 6px 10px;-->
-<!--      border: 1px solid var(&#45;&#45;color-border);-->
-<!--      background-color: var(&#45;&#45;color-card);-->
-<!--      color: var(&#45;&#45;color-text);-->
-<!--      border-radius: 4px;-->
-<!--      cursor: pointer;-->
-<!--      transition: background-color 0.2s;-->
-<!--    }-->
-<!--    .pagination button:hover {-->
-<!--      background-color: var(&#45;&#45;color-hover);-->
-<!--    }-->
-<!--    .pagination button.active {-->
-<!--      background-color: var(&#45;&#45;color-secondary);-->
-<!--      color: #fff;-->
-<!--      border-color: var(&#45;&#45;color-secondary);-->
-<!--    }-->
-<!--    @media (max-width: 600px) {-->
-<!--      .controls {-->
-<!--        flex-direction: column;-->
-<!--        align-items: stretch;-->
-<!--      }-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <header>-->
-<!--    <div class="container">-->
-<!--      <h1>Форум Университетского Форума</h1>-->
-<!--      <h2><a href="/logout/">Выйти</a></h2>-->
-<!--    </div>-->
-<!--  </header>-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Форум | Университетский Форум</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --font-family: 'Montserrat', sans-serif;
+      --color-bg: #f5f7fa;
+      --color-card: #ffffff;
+      --color-primary: #0d47a1;
+      --color-secondary: #64b5f6;
+      --color-text: #0d47a1;
+      --color-light-text: #555555;
+      --color-border: #d0d7de;
+      --color-hover: #e3f2fd;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+    header {
+      background-color: var(--color-card);
+      padding: 16px 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--color-primary);
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px 24px;
+    }
+    /* Поиск и фильтры */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .controls input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .controls select {
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: #fff;
+      color: var(--color-text);
+    }
+    /* Список вопросов */
+    .question-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .question-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 16px;
+      transition: background-color 0.2s;
+    }
+    .question-card:hover {
+      background-color: var(--color-hover);
+    }
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .question-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .question-meta {
+      font-size: 0.875rem;
+      color: var(--color-light-text);
+    }
+    .question-body {
+      margin-top: 8px;
+      font-size: 0.975rem;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+    .question-footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      font-size: 0.875rem;
+      color: var(--color-light-text);
+    }
+    .badge-answered {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    /* Пагинация */
+    .pagination {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pagination button {
+      padding: 6px 10px;
+      border: 1px solid var(--color-border);
+      background-color: var(--color-card);
+      color: var(--color-text);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .pagination button:hover {
+      background-color: var(--color-hover);
+    }
+    .pagination button.active {
+      background-color: var(--color-secondary);
+      color: #fff;
+      border-color: var(--color-secondary);
+    }
+    @media (max-width: 600px) {
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Форум Университетского Форума</h1>
+      <h2><a href="/profile/">Профиль</a></h2>
+      <h2><a href="/logout/">Выйти</a></h2>
+    </div>
+  </header>
+  <main class="container">
+    <a href="/new_question/">Новый вопрос</a>
+    <!-- Поиск и фильтры -->
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Поиск по вопросам..." />
+      <select id="sortSelect">
+        <option value="date_desc">Дата: новые сверху</option>
+        <option value="date_asc">Дата: старые сверху</option>
+        <option value="answered">Отвеченные</option>
+        <option value="unanswered">Неотвеченные</option>
+      </select>
+    </div>
 
-<!--  <main class="container">-->
-<!--    <a href="/">Новый вопрос</a>-->
-<!--    &lt;!&ndash; Поиск и фильтры &ndash;&gt;-->
-<!--    <div class="controls">-->
-<!--      <input type="text" id="searchInput" placeholder="Поиск по вопросам..." />-->
-<!--      <select id="sortSelect">-->
-<!--        <option value="date_desc">Дата: новые сверху</option>-->
-<!--        <option value="date_asc">Дата: старые сверху</option>-->
-<!--        <option value="answered">Отвеченные</option>-->
-<!--        <option value="unanswered">Неотвеченные</option>-->
-<!--      </select>-->
-<!--    </div>-->
+    <!-- Список вопросов -->
+    <ul class="question-list" id="questionList">
+      <!-- Элементы будут добавляться динамически -->
+    </ul>
+      {% for el in questions %}
+          <div class="col-md6 border rounded" style="margin: 10px;">
+              <h2 style="margin: 10px;"><a href="/questions/{{ el.id }}">{{el.title}}</a></h2>
+              <div style="margin: 10px">
+                  {{el.anons}}
+              </div>
+              <div style="margin: 10px">
+                  Автор - <a href="/users/{{el.user_id}}">{{el.user_id.username}}</a>
+              </div>
+          </div>
+      {% endfor %}
+    <!-- Пагинация -->
+    <div class="pagination" id="pagination">
+      <!-- Кнопки страниц будут создаваться динамически -->
+    </div>
+  </main>
 
-<!--    &lt;!&ndash; Список вопросов &ndash;&gt;-->
-<!--    <ul class="question-list" id="questionList">-->
-<!--      &lt;!&ndash; Элементы будут добавляться динамически &ndash;&gt;-->
-<!--    </ul>-->
-
-<!--    &lt;!&ndash; Пагинация &ndash;&gt;-->
-<!--    <div class="pagination" id="pagination">-->
-<!--      &lt;!&ndash; Кнопки страниц будут создаваться динамически &ndash;&gt;-->
-<!--    </div>-->
-<!--  </main>-->
-
-<!--  <script>-->
+  <script>
 <!--    // Пример данных: замените на актуальные вопросы с сервера-->
 <!--    const questions = [-->
 <!--      // Структура каждого объекта:-->
@@ -367,6 +377,6 @@
 <!--    document.addEventListener('DOMContentLoaded', () => {-->
 <!--      renderPage(1);-->
 <!--    });-->
-<!--  </script>-->
-<!--</body>-->
-<!--</html>-->
+  </script>
+</body>
+</html>
