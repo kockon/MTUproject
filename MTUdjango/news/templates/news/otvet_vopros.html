@@ -175,15 +175,15 @@
     </div>
 
     <!-- Заголовок раздела ответов -->
-    <div class="answers-header">Ответы (<span id="answersCount">0</span>)</div>
+    <div class="answers-header">Ответы</div>
 
     <!-- Список ответов -->
-    <div id="answersContainer">
+
       {% for answer in answers %}
-          {{ answer.asnwer }}
+      <div id="answersContainer">{{answer}}</div>
       {% endfor %}
       <!-- Если ответов нет, ниже покажется сообщение -->
-    </div>
+
 
     <!-- Необязательная форма для добавления ответа -->
     <div class="add-answer-form">

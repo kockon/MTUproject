@@ -24,7 +24,7 @@ class Answers(models.Model):
     question = models.ForeignKey(Articles, on_delete=models.CASCADE, related_name='answers')
 
     def __str__(self):
-        return self.title
+        return self.answer
 
     class Meta:
         verbose_name = 'Ответ'

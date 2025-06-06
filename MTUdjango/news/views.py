@@ -38,7 +38,6 @@ class NewsDetailView(DetailView):
         context = self.get_context_data()
         context['form'] = form
         context['answers'] = comments
-        print(context['answers'])
         return self.render_to_response(context)
 
 
